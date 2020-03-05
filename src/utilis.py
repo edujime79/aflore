@@ -53,3 +53,38 @@ def get_var_distibution(data, variable):
     out = counts[[variable, "count", "percentage"]].reset_index(drop=True)
 
     return out
+
+
+def get_var_groupby_avg(data, group, variable):
+    """
+        Parameters
+    ----------
+        data (dataframe): a dataframe that contain var
+        variable (str): a variable name
+
+    Returns
+    -------
+        Dataframe with hist
+    """
+
+    avgs = data.groupby(group)[variable].mean()
+    count = data.groupby(group)[variable].count()
+    avgs = avgs.to_frame(name="average")
+    avgs["count"] = count
+    avgs[group] = avgs.index
+    avgs = avgs[[group, "average", "count"]].reset_index(drop=True)
+
+    return avgs
+
+
+def export_results(data, response):
+    """
+            Parameters
+    ----------
+        data (dataframe): a dataframe to export
+
+    """
+
+    out_file = "{0}//{1}.xlsx".format(cfg.folder_assets_out, response)
+    return data.to_excel(out_file, index=False)
+

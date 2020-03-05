@@ -36,10 +36,12 @@ del data_q3
 
 data_q4 = utl.run_query(q.data_question_4)
 
-response_4a = data_q4.groupby("age")["acceptation_rate"].mean()
-response_4b = data_q4.groupby("gender")["acceptation_rate"].mean()
-response_4c = data_q4.groupby("salary_range")["acceptation_rate"].mean()
-response_4d = data_q4.groupby("location")["acceptation_rate"].mean()
+
+response_4a = utl.get_var_groupby_avg(data_q4, "age", "acceptation_rate")
+response_4b = utl.get_var_groupby_avg(data_q4, "gender", "acceptation_rate")
+response_4c = utl.get_var_groupby_avg(data_q4, "salary_range", "acceptation_rate")
+response_4d = utl.get_var_groupby_avg(data_q4, "location", "acceptation_rate")
+
 
 #5) What is the average work experience time?
 response_5 = utl.run_query(q.question_5)
@@ -62,9 +64,12 @@ for industry_name, data_industry in data_q6.groupby("industry_name"):
     plt.xlabel('Workexperience in Years')
     plt.show()
 
+response_6b = pd.DataFrame(response_6b).T
+response_6b["industry_name"] = response_6b.index
+response_6b = response_6b[["industry_name", "bins", "freq"]]
+
+
 # 7) What is the average number of candidates that have accepted an
 # invitation per post for the jobs
 # published in the month of January 2019? Plot the cohort time line (on job # published) by month.
-
-
 
