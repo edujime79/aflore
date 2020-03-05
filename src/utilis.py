@@ -60,6 +60,7 @@ def get_var_groupby_avg(data, group, variable):
         Parameters
     ----------
         data (dataframe): a dataframe that contain var
+        group (str): variable name to group information
         variable (str): a variable name
 
     Returns
@@ -82,6 +83,7 @@ def export_results(data, response):
             Parameters
     ----------
         data (dataframe): a dataframe to export
+        response(str): response count
 
     """
 
